@@ -8,7 +8,7 @@ const TodoController = Router()
  * List Todo
  */
 TodoController.get('/', async (req, res, next) => {
-    const list = await m$todo.listTodo()
+    const list = await m$todo.listTodo(req.query)
 
     response.sendResponse(res, list)
 })
