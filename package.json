@@ -1,0 +1,22 @@
+{
+  "name": "be-todolist",
+  "version": "1.0.0",
+  "description": "Backend Todo List",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node.js"
+  ],
+  "author": "yudhi kusuma",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "joi": "^17.6.0",
+    "mariadb": "^3.0.1"
+  }
+}

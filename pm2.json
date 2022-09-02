@@ -1,0 +1,20 @@
+{
+	"apps": [{
+		"name": "api-todolist",
+		"cwd": "/Users/ydhksm/Me/Magang/be-todolist",
+		"script": "./app.js",
+		"node_args": "--expose-gc",
+		"watch": false,
+		"ignore_watch": [
+			"./node_modules",
+			"./.git"
+		 ],
+		"log_date_format": "YYYY-MM-DD HH:mm Z",
+		"exec_mode": "cluster",
+		"instances": "1",
+		"max_memory_restart": "512M",
+		"env": {
+			"PORT": "5003"
+		}
+	 }]
+}
