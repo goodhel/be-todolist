@@ -1,13 +1,14 @@
 const { Router } = require('express')
 const m$todo = require('../modules/todo.module')
 const response = require('../helpers/response')
+const userSession = require('../helpers/middleware')
 
 const TodoController = Router()
 
 /**
  * List Todo
  */
-TodoController.get('/', async (req, res, next) => {
+TodoController.get('/', userSession, async (req, res, next) => {
     const list = await m$todo.listTodo(req.query)
 
     response.sendResponse(res, list)
@@ -16,7 +17,7 @@ TodoController.get('/', async (req, res, next) => {
 /**
  * Detail Todo
  */
-TodoController.get('/detail', async (req, res, next) => {
+TodoController.get('/detail', userSession, async (req, res, next) => {
     // req.query
     // http://localhost:5001/api/todos/detail?id=1
     const detail = await m$todo.detailTodo(req.query.id)
@@ -29,7 +30,7 @@ TodoController.get('/detail', async (req, res, next) => {
  * @param {string} title
  * @param {string} description
  */
-TodoController.post('/', async (req, res, next) => {
+TodoController.post('/', userSession, async (req, res, next) => {
     // req.body req.params req.query
     const add = await m$todo.addTodo(req.body)
 
@@ -42,7 +43,7 @@ TodoController.post('/', async (req, res, next) => {
  * @param {string} title
  * @param {string} description
  */
-TodoController.put('/', async (req, res, next) => {
+TodoController.put('/', userSession, async (req, res, next) => {
     const edit = await m$todo.editTodo(req.body)
 
     response.sendResponse(res, edit)
@@ -52,7 +53,7 @@ TodoController.put('/', async (req, res, next) => {
  * Delete Todo
  * @param {number} id
  */
-TodoController.delete('/:id', async (req, res, next) => {
+TodoController.delete('/:id', userSession, async (req, res, next) => {
     const del = await m$todo.deleteTodo(req.params.id)
 
     response.sendResponse(res, del)

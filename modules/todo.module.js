@@ -32,9 +32,15 @@ class _todo {
                     dt.created_at,
                     dt.updated_at,
                     dt.user_id,
-                    au.username
+                    au.username,
+                    dct.id comment_id,
+                    dct.user_id comment_user_id,
+                    auc.username comment_username,
+                    dct.comment
                 FROM d_todo dt
                 JOIN auth_user au ON au.id = dt.user_id
+                LEFT JOIN d_comment_todo dct ON dct.todo_id = dt.id
+                LEFT JOIN auth_user auc ON auc.id = dct.user_id
                 WHERE 1`,
                 params: []
             }
@@ -49,17 +55,39 @@ class _todo {
             const data = []
 
             for (const value of list) {
-                data.push({
-                    id: value.id,
-                    title: value.title,
-                    description: value.description,
-                    created_at: value.created_at,
-                    updated_at: value.updated_at,
-                    user: {
-                        id: value.user_id,
-                        username: value.username
+                const indexTodo = data.findIndex(todo => todo.id === value.id)
+                if (indexTodo === -1) {
+                    data.push({
+                        id: value.id,
+                        title: value.title,
+                        description: value.description,
+                        created_at: value.created_at,
+                        updated_at: value.updated_at,
+                        user: {
+                            id: value.user_id,
+                            username: value.username
+                        },
+                        comment: value.comment_id ? [{
+                            id: value.comment_id,
+                            comment: value.comment,
+                            user: {
+                                id: value.comment_user_id,
+                                username: value.comment_username
+                            }
+                        }] : []
+                    })
+                } else {
+                    if (value.comment_id) {
+                        data[indexTodo].comment.push({
+                            id: value.comment_id,
+                            comment: value.comment,
+                            user: {
+                                id: value.comment_user_id,
+                                username: value.comment_username
+                            }
+                        })
                     }
-                })
+                }
             }
 
             return {

@@ -5,5 +5,9 @@
         "user": "root",
         "password": "",
         "database": "todo_list"
+    },
+    "jwt": {
+        "secret": "secret-key-jwt",
+        "expired": 1800000
     }
 }
