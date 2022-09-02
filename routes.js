@@ -1,8 +1,10 @@
 const TodoController = require("./controllers/TodoController");
+const UserController = require("./controllers/UserControlller");
 
 // Define url API in Here
 const _routes = [
-    ['/todos', TodoController]
+    ['/todos', TodoController],
+    ['/user', UserController],
 ]
 
 // http://localhost:5001/api/todos

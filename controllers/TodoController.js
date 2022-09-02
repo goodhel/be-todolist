@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const m$todo = require('../modules/todo.modules')
+const m$todo = require('../modules/todo.module')
 const response = require('../helpers/response')
 
 const TodoController = Router()
